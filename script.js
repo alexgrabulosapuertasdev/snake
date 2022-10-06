@@ -7,6 +7,9 @@ const SIZE = 20;
 let direction;
 let snake;
 
+let intervalDraw;
+let intervalMove;
+
 start();
 
 function draw() {
@@ -52,6 +55,23 @@ function move() {
 
     snake.pop();
     snake.unshift(nextMove);
+
+    const { height, width } = canvas;
+    if (x >= width || x < 0 || y >= height || y < 0) {
+        start();
+    }
+}
+
+function resetValues() {
+    document.removeEventListener('keydown', selectDirection);
+    direction = undefined;
+    snake = [
+        { x: 4 * SIZE, y: 4 * SIZE },
+        { x: 3 * SIZE, y: 4 * SIZE },
+        { x: 2 * SIZE, y: 4 * SIZE }
+    ];
+    clearInterval(intervalDraw);
+    clearInterval(intervalMove);
 }
 
 function selectDirection(event) {
@@ -59,12 +79,8 @@ function selectDirection(event) {
 }
 
 function start() {
-    snake = [
-        { x: 4 * SIZE, y: 4 * SIZE },
-        { x: 3 * SIZE, y: 4 * SIZE },
-        { x: 2 * SIZE, y: 4 * SIZE }
-    ];
+    resetValues();
     document.addEventListener('keydown', selectDirection);
-    setInterval(draw, 100);
-    setInterval(move, 100);
+    intervalDraw = setInterval(draw, 100);
+    intervalMove = setInterval(move, 100);
 }
