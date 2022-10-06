@@ -1,0 +1,26 @@
+:root {
+    --gray: #777491;
+    --white: #FFF;
+}
+
+* {
+    box-sizing: border-box;
+    color: var(--white);
+    font-family: sans-serif;
+}
+
+body {
+    align-items: center;
+    background: var(--gray);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.title {
+    font-family:'Lucida Sans';
+}
+
