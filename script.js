@@ -3,6 +3,7 @@ canvas.width = canvas.height = 400;
 const ctx = canvas.getContext('2d');
 const score = document.getElementById('score');
 
+const MAX_SCORE = 400;
 const SIZE = 20;
 
 let apple;
@@ -100,6 +101,7 @@ function resetValues() {
         y:  height / 2,
     };
     direction = undefined;
+    score.innerText = 0;
     snake = [
         { x: 4 * SIZE, y: 4 * SIZE },
         { x: 3 * SIZE, y: 4 * SIZE },
@@ -121,5 +123,15 @@ function start() {
 }
 
 function upScore() {
-    score.innerText = Number(score.innerText) + 1;
+    const currentScore = Number(score.innerText) + 1;
+    score.innerText = currentScore;
+    
+    if (currentScore >= MAX_SCORE) {
+        win();
+    }
+}
+
+function win() {
+    alert('CONGRATULATIONS! You\'ve won!');
+    start();
 }
